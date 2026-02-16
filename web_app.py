@@ -196,5 +196,92 @@ def admin_set_link():
             
     return redirect(url_for('admin_panel'))
 
+@app.route('/admin/users')
+def admin_users():
+    if 'user_id' not in session or session['user_id'] != '2876886938':
+        return redirect(url_for('index'))
+    data = load_data()
+    users = []
+    for uid, info in data.items():
+        stats = {'successful': 0, 'reject': 0, 'processing': 0}
+        for detail in info.get('processing_details', []):
+            status = detail.get('status', '').lower()
+            if status == 'successful': stats['successful'] += 1
+            elif status == 'reject': stats['reject'] += 1
+            elif status == 'processing': stats['processing'] += 1
+            
+        users.append({
+            'chat_id': uid,
+            'sold': info.get('accounts_sold', 0),
+            'successful': stats['successful'],
+            'reject': stats['reject'],
+            'processing': stats['processing']
+        })
+    return render_template('admin_list.html', title="User List", items=users, type='users')
+
+@app.route('/admin/processing')
+def admin_processing():
+    if 'user_id' not in session or session['user_id'] != '2876886938':
+        return redirect(url_for('index'))
+    data = load_data()
+    items = []
+    now = datetime.now()
+    for uid, info in data.items():
+        for detail in info.get('processing_details', []):
+            if detail.get('status') == 'Processing':
+                ts = detail.get('timestamp', '')
+                elapsed_str = "N/A"
+                if ts:
+                    try:
+                        elapsed = now - datetime.fromisoformat(ts)
+                        hours, remainder = divmod(int(elapsed.total_seconds()), 3600)
+                        minutes, seconds = divmod(remainder, 60)
+                        elapsed_str = f"{hours}h {minutes}m {seconds}s"
+                    except: pass
+                items.append({
+                    'chat_id': uid,
+                    'number': detail.get('number'),
+                    'country': detail.get('country'),
+                    'time': elapsed_str,
+                    'price': detail.get('price', 0.0)
+                })
+    return render_template('admin_list.html', title="Processing Numbers", items=items, type='processing')
+
+@app.route('/admin/successful')
+def admin_successful():
+    if 'user_id' not in session or session['user_id'] != '2876886938':
+        return redirect(url_for('index'))
+    data = load_data()
+    items = []
+    for uid, info in data.items():
+        for detail in info.get('processing_details', []):
+            if detail.get('status') == 'Successful':
+                items.append({
+                    'chat_id': uid,
+                    'number': detail.get('number'),
+                    'country': detail.get('country'),
+                    'price': detail.get('price', 0.0),
+                    'date': detail.get('timestamp', '').split('T')[0] if 'T' in detail.get('timestamp', '') else 'N/A'
+                })
+    return render_template('admin_list.html', title="Successful Numbers", items=items, type='successful')
+
+@app.route('/admin/reject')
+def admin_reject():
+    if 'user_id' not in session or session['user_id'] != '2876886938':
+        return redirect(url_for('index'))
+    data = load_data()
+    items = []
+    for uid, info in data.items():
+        for detail in info.get('processing_details', []):
+            if detail.get('status') == 'Reject':
+                items.append({
+                    'chat_id': uid,
+                    'number': detail.get('number'),
+                    'country': detail.get('country'),
+                    'price': detail.get('price', 0.0),
+                    'date': detail.get('timestamp', '').split('T')[0] if 'T' in detail.get('timestamp', '') else 'N/A'
+                })
+    return render_template('admin_list.html', title="Rejected Numbers", items=items, type='reject')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
