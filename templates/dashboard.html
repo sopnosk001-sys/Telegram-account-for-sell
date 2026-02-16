@@ -282,19 +282,19 @@
             const now = new Date().getTime();
             document.querySelectorAll('.timer').forEach(timer => {
                 const startTime = new Date(timer.dataset.timestamp).getTime();
-                let totalAllowed = 24 * 60 * 60 * 1000;
+                let totalAllowed = 38 * 60 * 60 * 1000;
                 let distance = (startTime + totalAllowed) - now;
                 
-                // Auto-extension logic: if 24 hours passed, add another 24 hours
+                // Auto-extension logic: if 38 hours passed, add another 38 hours
                 while (distance < 0) {
-                    totalAllowed += 24 * 60 * 60 * 1000;
+                    totalAllowed += 38 * 60 * 60 * 1000;
                     distance = (startTime + totalAllowed) - now;
                 }
                 
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const totalHours = Math.floor(distance / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                timer.innerHTML = (hours < 10 ? "0"+hours : hours) + ":" + (minutes < 10 ? "0"+minutes : minutes) + ":" + (seconds < 10 ? "0"+seconds : seconds);
+                timer.innerHTML = (totalHours < 10 ? "0"+totalHours : totalHours) + ":" + (minutes < 10 ? "0"+minutes : minutes) + ":" + (seconds < 10 ? "0"+seconds : seconds);
             });
         }
         setInterval(updateTimers, 1000);
