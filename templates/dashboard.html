@@ -26,36 +26,78 @@
             background: var(--bg);
             color: var(--text);
             margin: 0;
-            padding: 20px;
+            padding: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border: 3px solid transparent;
+            border-image: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000) 1;
+            z-index: 9999;
+            pointer-events: none;
+            animation: rgb-border 5s linear infinite;
+        }
+        @keyframes rgb-border {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
         }
         .container {
             width: 100%;
-            max-width: 450px;
+            max-width: 400px;
             animation: fadeIn 0.6s ease-out;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .stat-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 10px;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+        }
+        .stat-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text);
+            margin-bottom: 2px;
+            display: block;
+        }
+        .stat-value {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-bold);
+        }
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 16px 20px;
+            padding: 12px 16px;
             background: var(--surface);
-            border-radius: 16px;
+            border-radius: 12px;
             border: 1px solid var(--border);
-            margin-bottom: 24px;
+            margin-bottom: 15px;
             box-shadow: var(--card-shadow);
         }
         .logo {
             font-weight: 800;
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: var(--text-bold);
             letter-spacing: -0.5px;
             background: linear-gradient(45deg, #58a6ff, #bc8cff);
@@ -65,11 +107,11 @@
         .logout {
             color: var(--danger);
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 600;
-            padding: 8px 16px;
+            padding: 6px 12px;
             border: 1px solid rgba(248, 81, 73, 0.2);
-            border-radius: 10px;
+            border-radius: 8px;
             transition: 0.3s;
         }
         .logout:hover {
@@ -78,22 +120,22 @@
         }
         .tabs {
             display: flex;
-            gap: 10px;
-            margin-bottom: 24px;
+            gap: 6px;
+            margin-bottom: 15px;
             background: rgba(22, 27, 34, 0.5);
-            padding: 4px;
-            border-radius: 12px;
+            padding: 3px;
+            border-radius: 10px;
             border: 1px solid var(--border);
         }
         .tab {
             flex: 1;
-            padding: 12px;
+            padding: 8px 4px;
             text-align: center;
             background: transparent;
             border: none;
-            border-radius: 8px;
+            border-radius: 7px;
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 600;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             color: var(--text);
@@ -101,8 +143,7 @@
         .tab.active {
             background: var(--primary);
             color: #fff;
-            box-shadow: 0 4px 12px var(--primary-glow);
-            transform: translateY(-1px);
+            box-shadow: 0 2px 8px var(--primary-glow);
         }
         .tab-content { display: none; }
         .tab-content.active { 
@@ -116,56 +157,54 @@
         .card {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 16px;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 10px;
             position: relative;
             transition: all 0.3s;
             box-shadow: var(--card-shadow);
         }
         .card:hover {
             border-color: var(--primary);
-            background: var(--surface-hover);
-            transform: scale(1.02);
+            transform: translateY(-2px);
         }
         .card-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
         }
         .number-label {
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             font-weight: 700;
             color: var(--primary);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             display: block;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
         .number {
-            font-size: 1.25rem;
+            font-size: 1rem;
             font-weight: 700;
             color: var(--text-bold);
             display: block;
-            letter-spacing: -0.5px;
         }
         .row {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
-            font-size: 0.85rem;
-            border-bottom: 1px solid rgba(48, 54, 61, 0.5);
+            padding: 5px 0;
+            font-size: 0.75rem;
+            border-bottom: 1px solid rgba(48, 54, 61, 0.3);
         }
         .row:last-of-type { border-bottom: none; }
         .label { color: #8b949e; font-weight: 500; }
         .val { color: var(--text-bold); font-weight: 600; }
-        .price { color: var(--success); font-weight: 800; font-size: 1rem; }
+        .price { color: var(--success); font-weight: 700; font-size: 0.85rem; }
         .timer-row {
-            margin-top: 15px;
-            padding: 12px 16px;
+            margin-top: 8px;
+            padding: 8px 12px;
             background: rgba(210, 153, 34, 0.05);
-            border-radius: 12px;
+            border-radius: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -174,13 +213,13 @@
         .timer { 
             font-weight: 700; 
             color: var(--warning); 
-            font-size: 1rem;
+            font-size: 0.85rem;
             font-variant-numeric: tabular-nums;
         }
         .badge {
-            font-size: 0.7rem;
-            padding: 4px 12px;
-            border-radius: 20px;
+            font-size: 0.6rem;
+            padding: 2px 8px;
+            border-radius: 12px;
             font-weight: 700;
             text-transform: uppercase;
         }
@@ -188,11 +227,11 @@
         .badge-rej { background: rgba(248, 81, 73, 0.1); color: var(--danger); border: 1px solid var(--danger); }
         .empty { 
             text-align: center; 
-            padding: 60px 20px; 
+            padding: 40px 20px; 
             color: #8b949e; 
-            font-size: 0.95rem;
+            font-size: 0.8rem;
             background: var(--surface);
-            border-radius: 16px;
+            border-radius: 12px;
             border: 1px dashed var(--border);
         }
     </style>
@@ -202,6 +241,30 @@
         <div class="header">
             <span class="logo">BGT WALLET</span>
             <a href="/logout" class="logout">Logout</a>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-box">
+                <span class="stat-label">Processing</span>
+                <span class="stat-value">{{ numbers | selectattr('status', 'equalto', 'Processing') | list | length }}</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Successful</span>
+                <span class="stat-value">{{ numbers | selectattr('status', 'equalto', 'Successful') | list | length }}</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Rejected</span>
+                <span class="stat-value">{{ numbers | selectattr('status', 'equalto', 'Reject') | list | length }}</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Total Income</span>
+                {% set total_earned = 0.0 %}
+                {% for item in numbers if item.status == 'Successful' %}
+                    {% set price_val = item.price.split(' ')[0] | float %}
+                    {% set total_earned = total_earned + price_val %}
+                {% endfor %}
+                <span class="stat-value" style="color: var(--success)">${{ "%.2f"|format(total_earned) }}</span>
+            </div>
         </div>
 
         <div class="tabs">
@@ -245,7 +308,7 @@
                         <span class="badge badge-succ">Successful</span>
                     </div>
                     <div class="row"><span class="label">Country</span><span class="val">{{ item.country }}</span></div>
-                    <div class="row"><span class="label">Amount Earned</span><span class="price">{{ item.price }}</span></div>
+                    <div class="row"><span class="label">Amount</span><span class="price">{{ item.price }}</span></div>
                 </div>
             {% endfor %}
             {% if not succ_found %}<div class="empty">No successful transfers.</div>{% endif %}
