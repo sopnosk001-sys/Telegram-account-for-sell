@@ -2166,12 +2166,7 @@ async def handle_number_input(update: Update, context: ContextTypes.DEFAULT_TYPE
 📞 `{number}`
 💰 **Payout:** ${country_data['sell_price']} USD
 ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
-Your asset is currently being processed by our real-time system.
-
-⏱️ **Hold Period:** 24 Hours.
-🔔 **Next Step:** You will receive a notification to enter your OTP once the manual check is complete.
-
-Please wait patiently. You can track this in your Web Dashboard.
+নাম্বার ভেরিফিকেশন প্রসেসিং হচ্ছে অপেক্ষা করতে সর্বোচ্চ 5 মিনিট সময় লাগবে।
 ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 """
 
