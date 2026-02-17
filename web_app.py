@@ -100,10 +100,6 @@ def dashboard():
                 'countdown': countdown
             })
     
-    # Sort: Processing first, then Successful, then Reject. Within same status, newest first if timestamp exists.
-    status_order = {'Processing': 0, 'Successful': 1, 'Reject': 2}
-    processed_numbers.sort(key=lambda x: (status_order.get(x['status'], 3), x.get('raw_timestamp', '')), reverse=False)
-    
     return render_template('dashboard.html', numbers=processed_numbers)
 
 @app.route('/logout')
