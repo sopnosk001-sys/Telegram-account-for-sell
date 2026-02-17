@@ -13,7 +13,7 @@
         "referrals": [],
         "referral_earnings": 0.0,
         "created_at": "2026-02-05T07:42:28.863886",
-        "last_activity": "2026-02-17T15:00:52.726197",
+        "last_activity": "2026-02-16T11:06:12.990759",
         "withdrawal_processing_balance": 0.0,
         "processing_details": [
             {
@@ -26,8 +26,8 @@
         ]
     },
     "7368378269": {
-        "main_balance_usdt": 5.540000000000002,
-        "hold_balance_usdt": 5.99,
+        "main_balance_usdt": 6.1400000000000015,
+        "hold_balance_usdt": 5.34,
         "topup_balance_usdt": 0.0,
         "accounts_bought": 0,
         "accounts_sold": 20,
@@ -51,7 +51,7 @@
             "017777777777",
             "25802580365",
             "258023336",
-            "8801341918338"
+            "65576576576"
         ],
         "referrer_id": null,
         "referrals": [
@@ -59,7 +59,7 @@
         ],
         "referral_earnings": 0.04,
         "created_at": "2026-02-05T07:43:03.600008",
-        "last_activity": "2026-02-17T15:09:28.038142",
+        "last_activity": "2026-02-17T15:12:12.255224",
         "withdrawal_processing_balance": 46.0,
         "processing_details": [
             {
@@ -154,11 +154,11 @@
                 "country": "Jordan \ud83c\uddef\ud83c\uddf4"
             },
             {
-                "number": "8801341918338",
-                "price": 0.65,
-                "status": "Processing",
-                "timestamp": "2026-02-17T11:04:27.274522",
-                "country": "Bangladesh \ud83c\udde7\ud83c\udde9"
+                "number": "65576576576",
+                "price": 0.6,
+                "status": "Successful",
+                "timestamp": "2026-02-17T15:11:27.155503",
+                "country": "Georgia \ud83c\uddec\ud83c\uddea"
             }
         ]
     },
@@ -462,10 +462,10 @@
     },
     "8063966043": {
         "main_balance_usdt": 9.789999999999996,
-        "hold_balance_usdt": 1.9500000000000002,
+        "hold_balance_usdt": 2.220446049250313e-16,
         "topup_balance_usdt": 0.0,
         "accounts_bought": 0,
-        "accounts_sold": 21,
+        "accounts_sold": 18,
         "sold_numbers": [
             "8801957138586",
             "8801724444379",
@@ -484,10 +484,7 @@
             "8801604225344",
             "8801627438570",
             "8801734009226",
-            "8801759074529",
-            "8801326214052",
-            "8801788939498",
-            "8801618494200"
+            "8801759074529"
         ],
         "referrer_id": null,
         "referrals": [
@@ -500,7 +497,7 @@
         ],
         "referral_earnings": 0.24000000000000002,
         "created_at": "2026-02-11T03:45:57.335248",
-        "last_activity": "2026-02-17T13:41:45.847061",
+        "last_activity": "2026-02-16T11:05:50.549165",
         "withdrawal_processing_balance": 0.0,
         "processing_details": [
             {
@@ -516,27 +513,6 @@
                 "status": "Reject",
                 "timestamp": "2026-02-16T10:38:30.664358",
                 "country": "N/A"
-            },
-            {
-                "number": "8801326214052",
-                "price": 0.65,
-                "status": "Successful",
-                "timestamp": "2026-02-17T10:55:01.657534",
-                "country": "Bangladesh \ud83c\udde7\ud83c\udde9"
-            },
-            {
-                "number": "8801788939498",
-                "price": 0.65,
-                "status": "Processing",
-                "timestamp": "2026-02-17T11:06:06.879061",
-                "country": "Bangladesh \ud83c\udde7\ud83c\udde9"
-            },
-            {
-                "number": "8801618494200",
-                "price": 0.65,
-                "status": "Processing",
-                "timestamp": "2026-02-17T11:18:02.139255",
-                "country": "Bangladesh \ud83c\udde7\ud83c\udde9"
             }
         ]
     },
@@ -735,7 +711,7 @@
         "referrals": [],
         "referral_earnings": 0.0,
         "created_at": "2026-02-12T06:32:17.313655",
-        "last_activity": "2026-02-17T11:56:36.812073",
+        "last_activity": "2026-02-16T10:24:20.311214",
         "withdrawal_processing_balance": 0.0,
         "processing_details": [
             {
@@ -1101,7 +1077,7 @@
         "referrals": [],
         "referral_earnings": 0.0,
         "created_at": "2026-02-16T04:43:22.074644",
-        "last_activity": "2026-02-17T14:54:50.028287",
+        "last_activity": "2026-02-16T04:46:38.745187",
         "processing_details": [
             {
                 "number": "25802580123",
@@ -1144,27 +1120,26 @@
         "withdrawal_processing_balance": 0.0
     },
     "8536899522": {
-        "main_balance_usdt": 3.9000000000000004,
-        "hold_balance_usdt": 0.65,
+        "main_balance_usdt": 0.65,
+        "hold_balance_usdt": 1.3,
         "topup_balance_usdt": 0.0,
         "accounts_bought": 0,
-        "accounts_sold": 4,
+        "accounts_sold": 3,
         "sold_numbers": [
             "01341918338",
             "01308120047",
-            "01327289124",
-            "01846460439"
+            "01327289124"
         ],
         "referrer_id": null,
         "referrals": [],
         "referral_earnings": 0.0,
         "created_at": "2026-02-16T04:55:35.884039",
-        "last_activity": "2026-02-17T16:00:40.195212",
+        "last_activity": "2026-02-16T10:44:40.074621",
         "processing_details": [
             {
                 "number": "01341918338",
                 "price": 0.65,
-                "status": "Successful",
+                "status": "Processing",
                 "timestamp": "2026-02-16T05:36:04.438612",
                 "country": "Bangladesh \ud83c\udde7\ud83c\udde9"
             },
@@ -1178,15 +1153,8 @@
             {
                 "number": "01327289124",
                 "price": 0.65,
-                "status": "Successful",
-                "timestamp": "2026-02-16T10:11:43.313588",
-                "country": "Bangladesh \ud83c\udde7\ud83c\udde9"
-            },
-            {
-                "number": "01846460439",
-                "price": 0.65,
                 "status": "Processing",
-                "timestamp": "2026-02-17T15:59:51.624890",
+                "timestamp": "2026-02-16T10:11:43.313588",
                 "country": "Bangladesh \ud83c\udde7\ud83c\udde9"
             }
         ],
@@ -1225,8 +1193,8 @@
         "withdrawal_processing_balance": 0.0
     },
     "6841570073": {
-        "main_balance_usdt": 1.3,
-        "hold_balance_usdt": 0.0,
+        "main_balance_usdt": 0.0,
+        "hold_balance_usdt": 1.3,
         "topup_balance_usdt": 0.0,
         "accounts_bought": 0,
         "accounts_sold": 2,
@@ -1238,19 +1206,19 @@
         "referrals": [],
         "referral_earnings": 0.0,
         "created_at": "2026-02-16T10:09:48.320517",
-        "last_activity": "2026-02-17T11:09:01.660123",
+        "last_activity": "2026-02-16T10:34:24.311029",
         "processing_details": [
             {
                 "number": "01706106531",
                 "price": 0.65,
-                "status": "Successful",
+                "status": "Processing",
                 "timestamp": "2026-02-16T10:11:28.256235",
                 "country": "Bangladesh \ud83c\udde7\ud83c\udde9"
             },
             {
                 "number": "01902991867",
                 "price": 0.65,
-                "status": "Successful",
+                "status": "Processing",
                 "timestamp": "2026-02-16T10:15:48.583672",
                 "country": "Bangladesh \ud83c\udde7\ud83c\udde9"
             }
@@ -1299,21 +1267,6 @@
         "referral_earnings": 0.0,
         "created_at": "2026-02-16T11:03:31.841398",
         "last_activity": "2026-02-16T11:03:31.841416",
-        "processing_details": [],
-        "withdrawal_processing_balance": 0.0
-    },
-    "6626476666": {
-        "main_balance_usdt": 0.0,
-        "hold_balance_usdt": 0.0,
-        "topup_balance_usdt": 0.0,
-        "accounts_bought": 0,
-        "accounts_sold": 0,
-        "sold_numbers": [],
-        "referrer_id": null,
-        "referrals": [],
-        "referral_earnings": 0.0,
-        "created_at": "2026-02-17T11:21:27.034736",
-        "last_activity": "2026-02-17T11:23:49.209009",
         "processing_details": [],
         "withdrawal_processing_balance": 0.0
     }
