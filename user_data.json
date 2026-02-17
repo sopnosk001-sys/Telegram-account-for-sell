@@ -27,10 +27,10 @@
     },
     "7368378269": {
         "main_balance_usdt": 5.540000000000002,
-        "hold_balance_usdt": 5.99,
+        "hold_balance_usdt": 6.640000000000001,
         "topup_balance_usdt": 0.0,
         "accounts_bought": 0,
-        "accounts_sold": 20,
+        "accounts_sold": 21,
         "sold_numbers": [
             "2754664616",
             "2580258025",
@@ -51,7 +51,8 @@
             "017777777777",
             "25802580365",
             "258023336",
-            "8801341918338"
+            "8801341918338",
+            "01923029089"
         ],
         "referrer_id": null,
         "referrals": [
@@ -59,7 +60,7 @@
         ],
         "referral_earnings": 0.04,
         "created_at": "2026-02-05T07:43:03.600008",
-        "last_activity": "2026-02-17T15:09:28.038142",
+        "last_activity": "2026-02-17T16:36:23.102658",
         "withdrawal_processing_balance": 46.0,
         "processing_details": [
             {
@@ -158,6 +159,13 @@
                 "price": 0.65,
                 "status": "Processing",
                 "timestamp": "2026-02-17T11:04:27.274522",
+                "country": "Bangladesh \ud83c\udde7\ud83c\udde9"
+            },
+            {
+                "number": "01923029089",
+                "price": 0.65,
+                "status": "Processing",
+                "timestamp": "2026-02-17T16:36:23.099966",
                 "country": "Bangladesh \ud83c\udde7\ud83c\udde9"
             }
         ]
