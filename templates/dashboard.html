@@ -38,15 +38,10 @@
             content: "";
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            border: 3px solid transparent;
-            border-image: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000) 1;
+            border: 2px solid var(--primary);
+            box-shadow: inset 0 0 15px var(--primary-glow), 0 0 15px var(--primary-glow);
             z-index: 9999;
             pointer-events: none;
-            animation: rgb-border 5s linear infinite;
-        }
-        @keyframes rgb-border {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(360deg); }
         }
         .container {
             width: 100%;
@@ -59,20 +54,20 @@
         }
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
             margin-bottom: 15px;
         }
         .stat-box {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 10px;
+            border-radius: 10px;
+            padding: 8px;
             text-align: center;
             box-shadow: var(--card-shadow);
         }
         .stat-label {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             color: var(--text);
@@ -80,7 +75,7 @@
             display: block;
         }
         .stat-value {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 700;
             color: var(--text-bold);
         }
@@ -255,15 +250,6 @@
             <div class="stat-box">
                 <span class="stat-label">Rejected</span>
                 <span class="stat-value">{{ numbers | selectattr('status', 'equalto', 'Reject') | list | length }}</span>
-            </div>
-            <div class="stat-box">
-                <span class="stat-label">Total Income</span>
-                {% set total_earned = 0.0 %}
-                {% for item in numbers if item.status == 'Successful' %}
-                    {% set price_val = item.price.split(' ')[0] | float %}
-                    {% set total_earned = total_earned + price_val %}
-                {% endfor %}
-                <span class="stat-value" style="color: var(--success)">${{ "%.2f"|format(total_earned) }}</span>
             </div>
         </div>
 

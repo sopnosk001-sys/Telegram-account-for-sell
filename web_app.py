@@ -204,18 +204,29 @@ def admin_users():
     users = []
     for uid, info in data.items():
         stats = {'successful': 0, 'reject': 0, 'processing': 0}
+        hold_balance = 0.0
+        main_balance = 0.0
+        
         for detail in info.get('processing_details', []):
             status = detail.get('status', '').lower()
-            if status == 'successful': stats['successful'] += 1
-            elif status == 'reject': stats['reject'] += 1
-            elif status == 'processing': stats['processing'] += 1
+            price = detail.get('price', 0.0)
+            if status == 'successful': 
+                stats['successful'] += 1
+                main_balance += price
+            elif status == 'reject': 
+                stats['reject'] += 1
+            elif status == 'processing': 
+                stats['processing'] += 1
+                hold_balance += price
             
         users.append({
             'chat_id': uid,
             'sold': info.get('accounts_sold', 0),
             'successful': stats['successful'],
             'reject': stats['reject'],
-            'processing': stats['processing']
+            'processing': stats['processing'],
+            'hold_balance': f"{hold_balance:.2f}",
+            'main_balance': f"{main_balance:.2f}"
         })
     return render_template('admin_list.html', title="User List", items=users, type='users')
 

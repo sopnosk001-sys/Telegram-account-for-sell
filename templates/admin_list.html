@@ -46,6 +46,8 @@
                         <th>Successful</th>
                         <th>Rejected</th>
                         <th>Processing</th>
+                        <th>Hold Balance</th>
+                        <th>Main Balance</th>
                     {% elif type == 'processing' %}
                         <th>Chat ID</th>
                         <th>Number</th>
@@ -70,6 +72,8 @@
                         <td style="color: var(--success);">{{ item.successful }}</td>
                         <td style="color: var(--danger);">{{ item.reject }}</td>
                         <td style="color: var(--warning);">{{ item.processing }}</td>
+                        <td style="color: var(--warning);">${{ item.hold_balance }}</td>
+                        <td style="color: var(--success);">${{ item.main_balance }}</td>
                     {% elif type == 'processing' %}
                         <td><code>{{ item.chat_id }}</code></td>
                         <td>{{ item.number }}</td>
