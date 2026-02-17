@@ -27,27 +27,11 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Web App Dashboard"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
 args = "Telegram Bot (Updated)"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Web App Dashboard (Updated)"
-
-[[workflows.workflow]]
-name = "Web App Dashboard"
-author = "agent"
-
-[workflows.workflow.metadata]
-outputType = "webview"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "python web_app.py"
-waitForPort = 5000
+args = "BGT Wallet Dashboard"
 
 [[workflows.workflow]]
 name = "Telegram Bot (Updated)"
@@ -61,7 +45,7 @@ args = "python main.py"
 outputType = "console"
 
 [[workflows.workflow]]
-name = "Web App Dashboard (Updated)"
+name = "BGT Wallet Dashboard"
 author = "agent"
 
 [[workflows.workflow.tasks]]
