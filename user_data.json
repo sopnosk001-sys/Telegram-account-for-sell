@@ -26,11 +26,11 @@
         ]
     },
     "7368378269": {
-        "main_balance_usdt": 5.540000000000002,
+        "main_balance_usdt": 6.1400000000000015,
         "hold_balance_usdt": 5.34,
         "topup_balance_usdt": 0.0,
         "accounts_bought": 0,
-        "accounts_sold": 19,
+        "accounts_sold": 20,
         "sold_numbers": [
             "2754664616",
             "2580258025",
@@ -50,7 +50,8 @@
             "9999999868",
             "017777777777",
             "25802580365",
-            "258023336"
+            "258023336",
+            "65576576576"
         ],
         "referrer_id": null,
         "referrals": [
@@ -58,7 +59,7 @@
         ],
         "referral_earnings": 0.04,
         "created_at": "2026-02-05T07:43:03.600008",
-        "last_activity": "2026-02-16T11:05:57.420847",
+        "last_activity": "2026-02-17T15:12:12.255224",
         "withdrawal_processing_balance": 46.0,
         "processing_details": [
             {
@@ -151,6 +152,13 @@
                 "status": "Processing",
                 "timestamp": "2026-02-16T11:05:57.412452",
                 "country": "Jordan \ud83c\uddef\ud83c\uddf4"
+            },
+            {
+                "number": "65576576576",
+                "price": 0.6,
+                "status": "Successful",
+                "timestamp": "2026-02-17T15:11:27.155503",
+                "country": "Georgia \ud83c\uddec\ud83c\uddea"
             }
         ]
     },
