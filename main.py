@@ -2823,6 +2823,11 @@ async def admin_sell_price_control_callback(update: Update, context: ContextType
         await query.edit_message_text("❌ Access Denied!")
         return
 
+    # Handle pagination
+    page = 0
+    if query.data and query.data.startswith("admin_sell_price_page_"):
+        page = int(query.data.split("_")[-1])
+
     price_control_text = """
 💸 **Sell Account Price Control**
 
@@ -2835,10 +2840,14 @@ Select a country to change its sell price:
 
     # Create keyboard with 2 countries per row
     keyboard = []
-    # Maximum countries to show per page to avoid "Message is too long" or keyboard size limits
-    # Telegram allows max 100 buttons per message
-    MAX_COUNTRIES = 90
-    display_countries = all_countries[:MAX_COUNTRIES]
+    
+    # Maximum countries to show per page
+    ITEMS_PER_PAGE = 50
+    total_pages = (len(all_countries) + ITEMS_PER_PAGE - 1) // ITEMS_PER_PAGE
+    
+    start_idx = page * ITEMS_PER_PAGE
+    end_idx = start_idx + ITEMS_PER_PAGE
+    display_countries = all_countries[start_idx:end_idx]
     
     for i in range(0, len(display_countries), 2):
         row = []
@@ -2857,6 +2866,16 @@ Select a country to change its sell price:
         if row:  # Only add non-empty rows
             keyboard.append(row)
 
+    # Pagination buttons
+    nav_row = []
+    if page > 0:
+        nav_row.append(InlineKeyboardButton("⬅️ Previous", callback_data=f"admin_sell_price_page_{page-1}"))
+    if page < total_pages - 1:
+        nav_row.append(InlineKeyboardButton("Next ➡️", callback_data=f"admin_sell_price_page_{page+1}"))
+    
+    if nav_row:
+        keyboard.append(nav_row)
+
     # Add "Add New Country" button
     keyboard.append([InlineKeyboardButton("🆕 Add New Country", callback_data="admin_add_new_country")])
     
@@ -2864,7 +2883,9 @@ Select a country to change its sell price:
     keyboard.append([InlineKeyboardButton("🔙 Admin Panel", callback_data="admin_panel")])
 
     reply_markup = InlineKeyboardMarkup(keyboard)
-    await query.edit_message_text(price_control_text, reply_markup=reply_markup, parse_mode='Markdown')
+    
+    page_info = f"\nPage {page + 1} of {total_pages}" if total_pages > 1 else ""
+    await query.edit_message_text(price_control_text + page_info, reply_markup=reply_markup, parse_mode='Markdown')
 
 async def admin_edit_sell_price_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Handle admin edit sell price for specific country"""
@@ -3168,24 +3189,105 @@ async def admin_buy_price_control_callback(update: Update, context: ContextTypes
         await query.edit_message_text("❌ Access Denied!")
         return
 
+    # Handle pagination
+    page = 0
+    if query.data and query.data.startswith("admin_buy_price_page_"):
+        page = int(query.data.split("_")[-1])
+
     price_control_text = """
 🛒 **Buy Account Price Control**
 
-Change country buy prices. Write the country name in English:
-
-Examples:
-• bangladesh
-• usa  
-• germany
-
-Please enter the country name:
+Select a country to change its buy price:
 """
 
-    context.user_data['admin_buy_price_control'] = True
-    keyboard = [[InlineKeyboardButton("🔙 Admin Panel", callback_data="admin_panel")]]
+    # Get all countries sorted by buy price (descending)
+    all_countries = list(COUNTRIES_DATA.keys())
+    all_countries.sort(key=lambda x: COUNTRIES_DATA[x]['buy_price'], reverse=True)
+
+    # Create keyboard with 2 countries per row
+    keyboard = []
+    
+    # Maximum countries to show per page
+    ITEMS_PER_PAGE = 50
+    total_pages = (len(all_countries) + ITEMS_PER_PAGE - 1) // ITEMS_PER_PAGE
+    
+    start_idx = page * ITEMS_PER_PAGE
+    end_idx = start_idx + ITEMS_PER_PAGE
+    display_countries = all_countries[start_idx:end_idx]
+    
+    for i in range(0, len(display_countries), 2):
+        row = []
+        for j in range(2):
+            if i + j < len(display_countries):
+                country_key = display_countries[i + j]
+                if country_key in COUNTRIES_DATA:
+                    country_data = COUNTRIES_DATA[country_key]
+                    buy_price = country_data['buy_price']
+                    name = country_data['name']
+                    if len(name) > 15:
+                        name = name[:12] + "..."
+                    button_text = f"{name} ${buy_price}"
+                    row.append(InlineKeyboardButton(button_text, callback_data=f"admin_edit_buy_{country_key}"))
+        if row:
+            keyboard.append(row)
+
+    # Pagination buttons
+    nav_row = []
+    if page > 0:
+        nav_row.append(InlineKeyboardButton("⬅️ Previous", callback_data=f"admin_buy_price_page_{page-1}"))
+    if page < total_pages - 1:
+        nav_row.append(InlineKeyboardButton("Next ➡️", callback_data=f"admin_buy_price_page_{page+1}"))
+    
+    if nav_row:
+        keyboard.append(nav_row)
+
+    # Add back button
+    keyboard.append([InlineKeyboardButton("🔙 Admin Panel", callback_data="admin_panel")])
+
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    
+    page_info = f"\nPage {page + 1} of {total_pages}" if total_pages > 1 else ""
+    await query.edit_message_text(price_control_text + page_info, reply_markup=reply_markup, parse_mode='Markdown')
+
+async def admin_edit_buy_price_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Handle admin edit buy price for specific country"""
+    query = update.callback_query
+    await query.answer()
+
+    user_id = str(query.from_user.id)
+    if user_id != ADMIN_CHAT_ID:
+        await query.edit_message_text("❌ Access Denied!")
+        return
+
+    # Extract country key from callback data: admin_edit_buy_{country_key}
+    country_key = query.data.replace('admin_edit_buy_', '')
+
+    if country_key not in COUNTRIES_DATA:
+        await query.edit_message_text("❌ Country data not found!")
+        return
+
+    country_data = COUNTRIES_DATA[country_key]
+    current_price = country_data['buy_price']
+
+    edit_price_text = f"""
+💰 **Edit Buy Price**
+
+🌍 **Country:** {country_data['name']}
+💵 **Current Buy Price:** ${current_price} USD
+
+Enter new buy price (USD):
+
+Example: 1.50
+"""
+
+    # Set context for price change
+    context.user_data['price_control_country'] = country_key
+    context.user_data['price_control_type'] = 'buy'
+    
+    keyboard = [[InlineKeyboardButton("🔙 Back to Buy Price Control", callback_data="admin_buy_price_control")]]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
-    await query.edit_message_text(price_control_text, reply_markup=reply_markup, parse_mode='Markdown')
+    await query.edit_message_text(edit_price_text, reply_markup=reply_markup, parse_mode='Markdown')
 
 async def admin_price_control_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Handle admin price control callback (legacy - should not be used)"""
@@ -4898,8 +5000,13 @@ def main() -> None:
     application.add_handler(CallbackQueryHandler(reject_pin_callback, pattern="^reject_pin_"))
     application.add_handler(CallbackQueryHandler(reject_pin_sms_callback, pattern="^reject_pin_sms_"))
     application.add_handler(CallbackQueryHandler(approve_callback, pattern="^approve_\d+_\d+(\.\d+)?$"))
+    # Register pagination handlers
+    application.add_handler(CallbackQueryHandler(admin_sell_price_control_callback, pattern="^admin_sell_price_page_"))
+    application.add_handler(CallbackQueryHandler(admin_buy_price_control_callback, pattern="^admin_buy_price_page_"))
+
     application.add_handler(CallbackQueryHandler(admin_sell_price_control_callback, pattern="^admin_sell_price_control$"))
     application.add_handler(CallbackQueryHandler(admin_buy_price_control_callback, pattern="^admin_buy_price_control$"))
+    application.add_handler(CallbackQueryHandler(admin_edit_buy_price_callback, pattern="^admin_edit_buy_"))
     application.add_handler(CallbackQueryHandler(admin_topup_info_callback, pattern="^admin_topup_info$"))
     application.add_handler(CallbackQueryHandler(admin_send_sms_callback, pattern="^admin_send_sms$"))
     application.add_handler(CallbackQueryHandler(admin_chat_user_callback, pattern="^admin_chat_user$"))
