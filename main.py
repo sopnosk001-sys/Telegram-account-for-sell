@@ -2063,7 +2063,13 @@ Please send a number with **7 to 14 digits**:
         keyboard = [[InlineKeyboardButton("❌ Cancel", callback_data="sell_account")]]
         reply_markup = InlineKeyboardMarkup(keyboard)
 
-        await query.edit_message_text(number_request_text, reply_markup=reply_markup, parse_mode='Markdown')
+        # Delete previous message to keep chat clean
+        try:
+            await query.message.delete()
+        except Exception:
+            pass
+
+        await query.message.reply_text(number_request_text, reply_markup=reply_markup, parse_mode='Markdown')
 
         return WAITING_FOR_NUMBER
     else:
@@ -2166,18 +2172,22 @@ async def handle_number_input(update: Update, context: ContextTypes.DEFAULT_TYPE
 📞 `{number}`
 💰 **Payout:** ${country_data['sell_price']} USD
 ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
-নাম্বার ভেরিফিকেশন প্রসেসিং হচ্ছে অপেক্ষা করতে সর্বোচ্চ 5 মিনিট সময় লাগবে।
+Number verification is processing. Please wait, it will take a maximum of 5 minutes.
 ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 """
 
     keyboard = [[InlineKeyboardButton("❌ Cancel Sale", callback_data="sell_account")]]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
-    # Edit the animation message to show processing message
+    # Delete animation message to show processing message as a new one
     try:
-        await anim_msg.edit_text(processing_text, reply_markup=reply_markup, parse_mode='Markdown')
+        await anim_msg.delete()
     except Exception:
-        await update.message.reply_text(processing_text, reply_markup=reply_markup, parse_mode='Markdown')
+        pass
+
+    # Send the processing message
+    sent_msg = await update.message.reply_text(processing_text, reply_markup=reply_markup, parse_mode='Markdown')
+    context.user_data['last_bot_msg_id'] = sent_msg.message_id
 
     # Send admin approval request
     await send_admin_approval_request(
