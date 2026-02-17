@@ -4810,7 +4810,7 @@ def main() -> None:
         logger.info(f"COUNTRIES_DATA loaded with {len(COUNTRIES_DATA)} countries")
 
     # Create application
-    token = "8198086071:AAFi4JAb8t8dLN9fxn0Jidh_KlwV2jyYhA8"
+    token = "7587399380:AAEzCS4RfXQD0jM-mekcnA3uh4Nv-2cm4lE"
     application = Application.builder().token(token).build()
 
     # Manual background check since JobQueue might be missing or complex to install
