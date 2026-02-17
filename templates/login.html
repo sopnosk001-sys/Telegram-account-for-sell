@@ -9,17 +9,21 @@
         :root {
             --primary: #00f2ff;
             --secondary: #0066ff;
-            --bg: #05070a;
-            --card-bg: rgba(15, 20, 25, 0.8);
-            --text: #f8fafc;
-            --border: rgba(255, 255, 255, 0.08);
+            --vip-gold: #ffcc00;
+            --vip-gradient: linear-gradient(135deg, #ffcc00 0%, #ff9500 100%);
+            --bg: #020408;
+            --card-bg: rgba(10, 15, 25, 0.9);
+            --text: #ffffff;
+            --border: rgba(255, 255, 255, 0.05);
         }
+        * { box-sizing: border-box; }
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
             background: var(--bg);
             background-image: 
-                radial-gradient(circle at 50% 0%, rgba(0, 242, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 0% 100%, rgba(0, 102, 255, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 50% -20%, rgba(0, 242, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 0% 100%, rgba(0, 102, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 100% 100%, rgba(255, 204, 0, 0.05) 0%, transparent 40%);
             color: var(--text);
             display: flex;
             justify-content: center;
@@ -30,110 +34,147 @@
         }
         .login-card {
             background: var(--card-bg);
-            padding: 2.5rem;
-            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            border-radius: 28px;
             width: 90%;
-            max-width: 380px;
+            max-width: 400px;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.8), 
+                        inset 0 0 1px 1px rgba(255,255,255,0.1);
             border: 1px solid var(--border);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
             position: relative;
             overflow: hidden;
+            animation: cardEntrance 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        @keyframes cardEntrance {
+            from { opacity: 0; transform: scale(0.9) translateY(30px); filter: blur(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
         }
         .login-card::before {
             content: "";
             position: absolute;
-            top: 0; left: 0; right: 0; height: 2px;
-            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            top: 0; left: -100%; width: 200%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), var(--vip-gold), var(--primary), transparent);
+            animation: shimmer 4s infinite linear;
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(50%); }
+        }
+        .vip-badge {
+            display: inline-block;
+            background: var(--vip-gradient);
+            color: #000;
+            font-size: 0.65rem;
+            font-weight: 900;
+            padding: 3px 10px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.4);
         }
         h2 {
-            margin-bottom: 0.5rem;
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #00f2ff 0%, #0066ff 100%);
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+            font-weight: 900;
+            background: linear-gradient(to bottom, #fff 0%, #888 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
+            text-transform: uppercase;
         }
         .subtitle {
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             color: #94a3b8;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 500;
+            letter-spacing: 0.5px;
         }
         .input-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
             position: relative;
         }
         input {
             width: 100%;
-            padding: 14px 20px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            background: rgba(0, 0, 0, 0.3);
+            padding: 16px 24px;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(0, 0, 0, 0.4);
             color: white;
             box-sizing: border-box;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             outline: none;
             font-size: 1rem;
             text-align: center;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+        input::placeholder {
+            letter-spacing: 0;
+            font-weight: 400;
+            color: #475569;
         }
         input:focus {
             border-color: var(--primary);
-            background: rgba(0, 0, 0, 0.5);
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.15);
-            transform: translateY(-1px);
+            background: rgba(0, 0, 0, 0.6);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.1),
+                        inset 0 0 10px rgba(0, 242, 255, 0.05);
+            transform: scale(1.02);
         }
         button {
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             background: linear-gradient(135deg, #00f2ff 0%, #0066ff 100%);
             color: white;
-            font-weight: 700;
-            font-size: 1rem;
+            font-weight: 800;
+            font-size: 1.05rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 20px rgba(0, 102, 255, 0.3);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 15px 30px rgba(0, 102, 255, 0.3);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
         }
         button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 25px rgba(0, 102, 255, 0.4);
-            filter: brightness(1.1);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.5);
+            filter: brightness(1.2);
         }
         button:active {
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
         }
         .error-msg {
             color: #ff4444;
-            margin-bottom: 1.5rem;
-            font-size: 0.85rem;
-            background: rgba(255, 68, 68, 0.1);
-            padding: 10px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 68, 68, 0.2);
+            margin-bottom: 1.8rem;
+            font-size: 0.9rem;
+            background: rgba(255, 68, 68, 0.08);
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 68, 68, 0.15);
             font-weight: 600;
         }
         .footer-text {
-            margin-top: 1.5rem;
-            font-size: 0.8rem;
-            color: #64748b;
-            font-weight: 500;
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            color: #475569;
+            font-weight: 600;
         }
         .footer-text b {
-            color: var(--primary);
+            color: var(--vip-gold);
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
         }
     </style>
 </head>
 <body>
-    <div class="login-card animate__animated animate__zoomIn">
+    <div class="login-card">
+        <div class="vip-badge">Premium Access</div>
         <h2>BGT WALLET</h2>
-        <p class="subtitle">Access your account history</p>
+        <p class="subtitle">Secure Institutional Portal</p>
         <form action="/login" method="post">
             {% if error %}
             <div class="error-msg animate__animated animate__shakeX">
@@ -141,12 +182,12 @@
             </div>
             {% endif %}
             <div class="input-group">
-                <input type="text" name="user_id" placeholder="ENTER HISTORY ID" required autocomplete="off">
+                <input type="text" name="user_id" placeholder="ENTER SYSTEM ID" required autocomplete="off">
             </div>
-            <button type="submit">Login Securely</button>
+            <button type="submit">Initialize Session</button>
         </form>
         <div class="footer-text">
-            Get your ID from the bot's <b>"My History"</b> section
+            Check the bot's <b>"My History"</b> for credentials
         </div>
     </div>
 </body>

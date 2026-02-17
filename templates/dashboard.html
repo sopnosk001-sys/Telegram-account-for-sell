@@ -4,283 +4,299 @@
     <meta charset="UTF-8">
     <title>BGT Wallet - Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #05070a;
-            --surface: #0f1419;
-            --surface-hover: #151b23;
+            --bg: #02050a;
+            --surface: rgba(10, 15, 30, 0.8);
+            --surface-hover: rgba(16, 24, 45, 0.9);
             --primary: #00f2ff;
             --primary-glow: rgba(0, 242, 255, 0.3);
-            --success: #00ff88;
-            --warning: #ffaa00;
-            --danger: #ff4444;
+            --vip-gold: #ffcc00;
+            --vip-gradient: linear-gradient(135deg, #ffcc00 0%, #ff9500 100%);
+            --success: #00ffaa;
+            --warning: #ffcc00;
+            --danger: #ff4d4d;
             --text: #94a3b8;
-            --text-bold: #f8fafc;
-            --border: rgba(255, 255, 255, 0.08);
-            --card-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            --text-bold: #ffffff;
+            --border: rgba(255, 255, 255, 0.05);
+            --card-shadow: 0 20px 50px rgba(0,0,0,0.7);
             --accent: linear-gradient(135deg, #00f2ff 0%, #0066ff 100%);
         }
         * { box-sizing: border-box; }
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
             background: var(--bg);
             background-image: 
-                radial-gradient(circle at 50% 0%, rgba(0, 242, 255, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 0% 100%, rgba(0, 102, 255, 0.05) 0%, transparent 50%);
+                radial-gradient(circle at 50% 0%, rgba(0, 242, 255, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(255, 204, 0, 0.08) 0%, transparent 40%);
             color: var(--text);
             margin: 0;
-            padding: 12px;
+            padding: 16px;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
             overflow-x: hidden;
-            position: relative;
-        }
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            border: 1px solid rgba(0, 242, 255, 0.2);
-            box-shadow: inset 0 0 30px rgba(0, 242, 255, 0.05);
-            z-index: 9999;
-            pointer-events: none;
-            animation: pulse-glow 4s ease-in-out infinite alternate;
-        }
-        @keyframes pulse-glow {
-            0% { opacity: 0.3; box-shadow: inset 0 0 20px rgba(0, 242, 255, 0.05); }
-            100% { opacity: 0.6; box-shadow: inset 0 0 40px rgba(0, 242, 255, 0.1); }
+            letter-spacing: -0.01em;
         }
         .container {
             width: 100%;
-            max-width: 400px;
-            animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            max-width: 440px;
+            animation: containerEntrance 1s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); filter: blur(10px); }
+        @keyframes containerEntrance {
+            from { opacity: 0; transform: translateY(30px); filter: blur(15px); }
             to { opacity: 1; transform: translateY(0); filter: blur(0); }
-        }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .stat-box {
-            background: rgba(15, 20, 25, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 12px 8px;
-            text-align: center;
-            box-shadow: var(--card-shadow);
-            transition: transform 0.3s ease;
-        }
-        .stat-box:hover {
-            transform: translateY(-2px);
-            border-color: var(--primary);
-        }
-        .stat-label {
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text);
-            margin-bottom: 4px;
-            display: block;
-            opacity: 0.8;
-        }
-        .stat-value {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--text-bold);
-            text-shadow: 0 0 10px rgba(248, 250, 252, 0.2);
         }
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 14px 20px;
-            background: rgba(15, 20, 25, 0.8);
-            backdrop-filter: blur(12px);
-            border-radius: 14px;
+            padding: 18px 28px;
+            background: var(--surface);
+            backdrop-filter: blur(30px);
+            border-radius: 24px;
             border: 1px solid var(--border);
-            margin-bottom: 20px;
-            box-shadow: var(--card-shadow);
+            margin-bottom: 28px;
+            box-shadow: var(--card-shadow), inset 0 0 0 1px rgba(255,255,255,0.05);
         }
         .logo {
             font-weight: 900;
-            font-size: 1.1rem;
-            color: var(--text-bold);
+            font-size: 1.3rem;
+            color: #fff;
             letter-spacing: 1px;
             background: var(--accent);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
         }
+        .vip-status {
+            background: var(--vip-gradient);
+            color: #000;
+            font-size: 0.65rem;
+            font-weight: 900;
+            padding: 3px 10px;
+            border-radius: 6px;
+            margin-left: 10px;
+            vertical-align: middle;
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.4);
+            letter-spacing: 1px;
+        }
         .logout {
-            color: #fff;
+            color: #ff4d4d;
             text-decoration: none;
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 7px 14px;
-            background: rgba(255, 68, 68, 0.1);
-            border: 1px solid rgba(255, 68, 68, 0.2);
-            border-radius: 9px;
-            transition: all 0.3s ease;
+            font-size: 0.8rem;
+            font-weight: 800;
+            padding: 10px 20px;
+            background: rgba(255, 77, 77, 0.1);
+            border: 1px solid rgba(255, 77, 77, 0.2);
+            border-radius: 14px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            letter-spacing: 1px;
         }
         .logout:hover {
-            background: var(--danger);
-            box-shadow: 0 0 15px rgba(255, 68, 68, 0.4);
+            background: #ff4d4d;
+            color: #fff;
+            box-shadow: 0 10px 25px rgba(255, 77, 77, 0.4);
+            transform: scale(1.05) translateY(-2px);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+        .stat-box {
+            background: var(--surface);
+            backdrop-filter: blur(30px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 20px 10px;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .stat-box:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            background: var(--surface-hover);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8), 0 0 20px var(--primary-glow);
+        }
+        .stat-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #64748b;
+            margin-bottom: 8px;
+            display: block;
+            font-weight: 800;
+        }
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255,255,255,0.15);
         }
         .tabs {
             display: flex;
-            gap: 8px;
-            margin-bottom: 20px;
-            background: rgba(15, 20, 25, 0.5);
-            padding: 5px;
-            border-radius: 12px;
+            gap: 12px;
+            margin-bottom: 28px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 8px;
+            border-radius: 20px;
             border: 1px solid var(--border);
         }
         .tab {
             flex: 1;
-            padding: 10px 4px;
+            padding: 14px 4px;
             text-align: center;
             background: transparent;
             border: none;
-            border-radius: 9px;
+            border-radius: 14px;
             cursor: pointer;
-            font-size: 0.8rem;
-            font-weight: 700;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            color: var(--text);
+            font-size: 0.85rem;
+            font-weight: 900;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            color: #475569;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1.5px;
         }
         .tab.active {
             background: var(--accent);
             color: #fff;
-            box-shadow: 0 4px 15px rgba(0, 242, 255, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 102, 255, 0.4);
+            transform: scale(1.03);
         }
         .tab-content { display: none; }
         .tab-content.active { 
             display: block;
-            animation: contentFade 0.5s ease-out;
+            animation: contentFade 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
         @keyframes contentFade {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(15px) scale(0.98); filter: blur(10px); }
+            to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
         }
         .card {
-            background: rgba(15, 20, 25, 0.6);
-            backdrop-filter: blur(10px);
+            background: var(--surface);
+            backdrop-filter: blur(30px);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 12px;
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 18px;
             position: relative;
-            transition: all 0.2s ease;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             box-shadow: var(--card-shadow);
             overflow: hidden;
-            will-change: transform, opacity;
+        }
+        .card::before {
+            content: "";
+            position: absolute;
+            left: 0; top: 0; width: 6px; height: 100%;
+            background: var(--accent);
+            opacity: 0.2;
+            transition: opacity 0.4s;
         }
         .card:hover {
             border-color: var(--primary);
-            transform: translateY(-2px);
-            background: rgba(21, 27, 35, 0.8);
+            transform: translateY(-6px) scale(1.02);
+            background: var(--surface-hover);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 30px rgba(0, 242, 255, 0.05);
         }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
-        }
+        .card:hover::before { opacity: 1; }
         .number-label {
-            font-size: 0.6rem;
-            font-weight: 800;
+            font-size: 0.7rem;
+            font-weight: 900;
             color: var(--primary);
             text-transform: uppercase;
-            letter-spacing: 1.2px;
+            letter-spacing: 3px;
             display: block;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
         }
         .number {
-            font-size: 1.15rem;
-            font-weight: 800;
-            color: var(--text-bold);
-            display: block;
-            letter-spacing: 0.5px;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 1px;
+            text-shadow: 0 0 15px rgba(255,255,255,0.1);
         }
         .row {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
-            font-size: 0.8rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 12px 0;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
         .row:last-of-type { border-bottom: none; }
-        .label { color: var(--text); font-weight: 600; opacity: 0.7; }
-        .val { color: var(--text-bold); font-weight: 700; }
+        .label { color: #475569; font-weight: 800; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1.5px; }
+        .val { color: #fff; font-weight: 900; }
         .price { 
             color: var(--success); 
-            font-weight: 900; 
-            font-size: 0.95rem;
-            text-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+            font-weight: 950; 
+            font-size: 1.1rem;
+            text-shadow: 0 0 20px rgba(0, 255, 170, 0.3);
         }
         .timer-row {
-            margin-top: 12px;
-            padding: 10px 14px;
-            background: rgba(255, 170, 0, 0.03);
-            border-radius: 10px;
+            margin-top: 20px;
+            padding: 15px 22px;
+            background: rgba(255, 204, 0, 0.08);
+            border-radius: 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px solid rgba(255, 170, 0, 0.1);
+            border: 1px solid rgba(255, 204, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         .timer { 
-            font-weight: 800; 
-            color: var(--warning); 
-            font-size: 0.95rem;
+            font-weight: 950; 
+            color: var(--vip-gold); 
+            font-size: 1.3rem;
             font-variant-numeric: tabular-nums;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(255, 204, 0, 0.3);
         }
         .badge {
-            font-size: 0.65rem;
-            padding: 4px 10px;
-            border-radius: 8px;
-            font-weight: 800;
+            font-size: 0.7rem;
+            padding: 6px 14px;
+            border-radius: 10px;
+            font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1.5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
         .badge-succ { 
-            background: rgba(0, 255, 136, 0.1); 
+            background: rgba(0, 255, 170, 0.15); 
             color: var(--success); 
-            border: 1px solid rgba(0, 255, 136, 0.2); 
+            border: 1px solid rgba(0, 255, 170, 0.3); 
         }
         .badge-rej { 
-            background: rgba(255, 68, 68, 0.1); 
+            background: rgba(255, 77, 77, 0.15); 
             color: var(--danger); 
-            border: 1px solid rgba(255, 68, 68, 0.2); 
+            border: 1px solid rgba(255, 77, 77, 0.3); 
         }
         .empty { 
             text-align: center; 
-            padding: 50px 20px; 
-            color: var(--text); 
-            font-size: 0.85rem;
-            font-weight: 600;
-            background: rgba(15, 20, 25, 0.4);
-            border-radius: 16px;
-            border: 1px dashed var(--border);
-            opacity: 0.8;
+            padding: 80px 30px; 
+            color: #334155; 
+            font-size: 1rem;
+            font-weight: 900;
+            background: var(--surface);
+            border-radius: 28px;
+            border: 2px dashed rgba(255,255,255,0.05);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.6;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <span class="logo">BGT WALLET</span>
-            <a href="/logout" class="logout">Logout</a>
+            <div>
+                <span class="logo">BGT WALLET</span>
+                <span class="vip-status">PREMIUM VIP</span>
+            </div>
+            <a href="/logout" class="logout">TERMINATE</a>
         </div>
 
         <div class="stats-grid">
@@ -309,16 +325,16 @@
             {% for item in numbers if item.status == 'Processing' %}
                 {% set proc_found = true %}
                 <div class="card">
-                    <div class="card-header">
-                        <div>
-                            <span class="number-label">Number</span>
-                            <span class="number">{{ item.number }}</span>
-                        </div>
+                    <div>
+                        <span class="number-label">Number</span>
+                        <span class="number">{{ item.number }}</span>
                     </div>
-                    <div class="row"><span class="label">Country</span><span class="val">{{ item.country }}</span></div>
-                    <div class="row"><span class="label">Payout</span><span class="price">{{ item.price }}</span></div>
+                    <div style="margin-top: 15px;">
+                        <div class="row"><span class="label">Country</span><span class="val">{{ item.country }}</span></div>
+                        <div class="row"><span class="label">Payout</span><span class="price">{{ item.price }}</span></div>
+                    </div>
                     <div class="timer-row">
-                        <span class="label" style="font-size: 0.75rem; color: var(--warning);">HOLD TIME</span>
+                        <span class="label" style="font-size: 0.75rem; color: var(--warning); opacity: 1;">HOLD TIME</span>
                         <span class="timer" data-timestamp="{{ item.raw_timestamp }}">--:--:--</span>
                     </div>
                 </div>
@@ -331,15 +347,17 @@
             {% for item in numbers if item.status == 'Successful' %}
                 {% set succ_found = true %}
                 <div class="card">
-                    <div class="card-header">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                         <div>
                             <span class="number-label">Number</span>
                             <span class="number">{{ item.number }}</span>
                         </div>
                         <span class="badge badge-succ">Successful</span>
                     </div>
-                    <div class="row"><span class="label">Country</span><span class="val">{{ item.country }}</span></div>
-                    <div class="row"><span class="label">Amount</span><span class="price">{{ item.price }}</span></div>
+                    <div style="margin-top: 15px;">
+                        <div class="row"><span class="label">Country</span><span class="val">{{ item.country }}</span></div>
+                        <div class="row"><span class="label">Amount</span><span class="price">{{ item.price }}</span></div>
+                    </div>
                 </div>
             {% endfor %}
             {% if not succ_found %}<div class="empty">No successful transfers.</div>{% endif %}
@@ -350,15 +368,17 @@
             {% for item in numbers if item.status == 'Reject' %}
                 {% set rej_found = true %}
                 <div class="card">
-                    <div class="card-header">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                         <div>
                             <span class="number-label">Number</span>
                             <span class="number">{{ item.number }}</span>
                         </div>
                         <span class="badge badge-rej">Rejected</span>
                     </div>
-                    <div class="row"><span class="label">Country</span><span class="val">{{ item.country }}</span></div>
-                    <div class="row"><span class="label">Amount</span><span class="price">{{ item.price }}</span></div>
+                    <div style="margin-top: 15px;">
+                        <div class="row"><span class="label">Country</span><span class="val">{{ item.country }}</span></div>
+                        <div class="row"><span class="label">Amount</span><span class="price">{{ item.price }}</span></div>
+                    </div>
                 </div>
             {% endfor %}
             {% if not rej_found %}<div class="empty">No rejected requests.</div>{% endif %}
@@ -376,10 +396,11 @@
             const now = new Date().getTime();
             document.querySelectorAll('.timer').forEach(timer => {
                 const startTime = new Date(timer.dataset.timestamp).getTime();
+                if (!startTime) return;
+                
                 let totalAllowed = 38 * 60 * 60 * 1000;
                 let distance = (startTime + totalAllowed) - now;
                 
-                // Auto-extension logic: if 38 hours passed, add another 38 hours
                 while (distance < 0) {
                     totalAllowed += 38 * 60 * 60 * 1000;
                     distance = (startTime + totalAllowed) - now;
